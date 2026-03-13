@@ -1,0 +1,9 @@
+.contenedorPadreDeContador{
+    display: flex;
+    height: 15vh;
+}
+.containerPadreContadorTiempo{
+    margin: auto;
+    font-size: var(---tamaño-de-texto-normal);
+    font-family: var(---estilo-de-fuente);
+}

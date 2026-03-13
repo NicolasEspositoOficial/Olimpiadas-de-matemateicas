@@ -1,0 +1,32 @@
+:root{
+    /* Colores */
+    ---color-base-1: #ffffff;
+    ---color-base-2: #fff;
+    ---color-base-3: #ffff;
+    /* tamaños de textos */
+    ---tamaño-de-texto-extra-pequeño: 1.3rem;
+    ---tamaño-de-texto-pequeño: 1.6rem;
+    ---tamaño-de-texto-normal: 2rem;
+    ---tamaño-de-texto-grande: 2.4rem;
+    ---tamaño-de-texto-extra-grande: 2.88rem;
+    ---estilo-de-fuente: Arial, Helvetica, sans-serif;
+    /* padding */
+    ---estilo-de-padding-1: 0.5rem 1rem;
+    
+}
+.ventana-de-registro{
+    display: flex;
+    
+}
+.lado-derecho-registro, .lado-izquierdo-registro{
+    width: 50%;
+}
+.lado-izquierdo-registro{
+    background-color: aquamarine;
+    align-content: center;
+    font-size: var(---tamaño-de-texto-normal);
+    padding: 2rem;
+}
+.estilo-de-texto-de-formulario-registro{
+    padding: 1rem  0rem;
+}

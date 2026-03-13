@@ -1,0 +1,63 @@
+.contenedor-padre{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    background-color: aqua;
+}
+.contenedor_credenciales_usuario{
+    margin: auto;
+    background-color: transparent;
+    backdrop-filter: blur(20px);
+    border: solid 0.1rem white;
+    border-radius: 1rem;
+    width: 45rem;
+    height: 35rem;
+    justify-content: space-around;
+    align-content: center;
+    text-align: center;
+}
+.titulo-de-bloque-1{
+    font-size: var(---tamaño-de-texto-grande);
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(---estilo-de-fuente);
+    margin: 2rem 0rem;
+}
+.label_credenciales{
+    font-size: var(---tamaño-de-texto-normal);
+    font-family: var(---estilo-de-fuente);
+    margin: 0.5rem;
+}
+.estilo_de_input_1, .estilo_de_input_2{
+    border: none;
+    border-radius: 1rem;
+    padding: var(---estilo-de-padding-1);
+    outline: none;
+    font-size: var(---tamaño-de-texto-normal);
+    cursor: pointer;
+    text-transform: capitalize;
+}
+.estilo_de_input_2{
+    text-align: center;
+    margin: 3rem 0rem;
+}
+.estilos_de_opciones_grado{
+    outline: none;
+    text-align: center;
+    cursor: pointer;
+}
+.btn_Comenzar{
+    padding: var(---estilo-de-padding-1);
+    font-size: var(---tamaño-de-texto-normal);
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 300ms ease;
+    margin: 0rem 1rem;
+}
+.btn_Comenzar:hover{
+    scale: 110%;
+}
+.opciones-de-sesion{
+
+}

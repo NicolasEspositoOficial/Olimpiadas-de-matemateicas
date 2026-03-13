@@ -1,0 +1,63 @@
+.contenedorPadrePregunta {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    height: 70vh;            /* Mantiene el área de trabajo */
+}
+.contenedor-de-pregunta {
+    /* Quitamos el margin: auto y el height: 100% */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    background-color: rgb(240, 240, 240);
+    width: 80%;       /* Puedes bajarlo a 60% si lo quieres más estrecho */
+    height: 80%;
+    border-radius: 1rem;
+    /* Al no tener 'height', el fondo verde solo rodeará lo que esté escrito */
+}
+.texto-de-pregunta{
+    width: 90%;
+}
+.contador-de-preguntas{
+    text-align: center;
+    font-size: var(---tamaño-de-texto-extra-pequeño);
+    padding-bottom: 1rem;
+}
+.estilo-de-pregunta{
+    font-size: var(---tamaño-de-texto-normal);
+    text-align: center;
+    font-family: var(---estilo-de-fuente);
+}
+.imagen{
+    width: 100%;
+    height: 45%;
+}
+.imagen-de-pregunta{
+    width: 100%;
+    height: 100%;object-fit: contain;
+}
+.respuestas{
+    width: 90%;
+}
+.bloque-de-respuestas{
+    width: 100%;
+    display: flex;
+}
+.estilo-de-respuesta{
+    width: 40%;
+    margin: auto;
+    padding: var(---estilo-de-padding-1);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: var(---tamaño-de-texto-normal);
+    border: none;
+    border-radius: 1rem;
+    background-color: rgb(228, 228, 228);
+    transition: all 250ms ease;
+}
+.estilo-de-respuesta:hover{
+    scale: 110%;
+    background-color: rgb(216, 216, 216);
+}
