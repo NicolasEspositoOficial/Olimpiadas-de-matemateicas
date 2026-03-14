@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './LoginAdmin.css'
 
 const LoginAdmin = ({ onLogin }) => {
   const [user, setUser] = useState('');
@@ -16,26 +17,12 @@ const LoginAdmin = ({ onLogin }) => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#f0f0f0' }}>
-      <form onSubmit={handleSubmit} style={{ background: 'white', padding: '30px', borderRadius: '10px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
-        <h2>Acceso Administrativo</h2>
-        <input 
-          type="text" 
-          placeholder="Usuario" 
-          value={user} 
-          onChange={(e) => setUser(e.target.value)} 
-          style={{ display: 'block', width: '100%', marginBottom: '10px', padding: '10px' }}
-        />
-        <input 
-          type="password" 
-          placeholder="Contraseña" 
-          value={pass} 
-          onChange={(e) => setPass(e.target.value)} 
-          style={{ display: 'block', width: '100%', marginBottom: '20px', padding: '10px' }}
-        />
-        <button type="submit" style={{ width: '100%', padding: '10px', background: '#333', color: 'white', border: 'none', cursor: 'pointer' }}>
-          Entrar
-        </button>
+    <div className='container-padre-credenciales-admin'>
+      <form onSubmit={handleSubmit} className='estilo-de-formulario'>
+        <h2 className='titulo-de-bloque-de-credencuales-admin'>Acceso Administrativo</h2>
+        <input type="text" placeholder="Usuario" value={user} onChange={(e) => setUser(e.target.value)} className='input-credencial-admin'/>
+        <input type="password" placeholder="Contraseña" value={pass} onChange={(e) => setPass(e.target.value)} className='input-credencial-admin'/>
+        <button type="submit" className='btn-iniciar-admin'> Entrar </button>
       </form>
     </div>
   );

@@ -1,0 +1,42 @@
+.container-padre-credenciales-admin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f0f0f0;
+}
+.estilo-de-formulario{
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.titulo-de-bloque-de-credencuales-admin{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: var(---tamaño-de-texto-normal);
+    font-family: var(---estilo-de-fuente);
+}
+.input-credencial-admin{
+    display: block;
+    width: 100%; 
+    margin: 1rem 0rem;
+    padding: 1rem 1rem;
+    font-family: var(---estilo-de-fuente);  
+    font-size: var(---tamaño-de-texto-normal);  
+}
+.btn-iniciar-admin{
+    width: 100%;
+    padding: 10px;
+    background: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 300ms ease;
+    border-radius: 1rem;
+    font-family: var(---estilo-de-fuente);
+    font-size: var(---tamaño-de-texto-normal);
+}
+.btn-iniciar-admin:hover{
+    scale: 110%;
+}

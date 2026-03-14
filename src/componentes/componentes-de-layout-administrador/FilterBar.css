@@ -1,0 +1,22 @@
+.container-padre-filterbar{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+/* Estilo base */
+.btn-filtrobar-grado {
+  padding: 1rem 3rem;
+  border-radius: 2rem;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #e0e0e0;
+  color: black;
+}
+
+/* Estilo cuando está activo */
+.btn-filtrobar-grado.active {
+  background-color: #9e9e9e;
+  color: white;
+}

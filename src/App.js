@@ -7,22 +7,27 @@ import { Routes, Route } from 'react-router-dom';
 // IMPORTACIONES DE ADMINISTRADOR
 import Sidebar from './componentes/componentes-de-layout-administrador/Sidebar';
 import DashboardAdmin from './pages/ventana-de-administracion'; 
-import LoginAdmin from './componentes/LoginAdmin'; // <-- Nuevo componente de acceso
+import LoginAdmin from './componentes/LoginAdmin';
+import EditorPreguntas from './componentes/EditorPreguntas'; 
 
 function App() {
   const [data, setData] = useState([]);
   const [examenActivo, setExamenActivo] = useState(false);
 
+  // --- NUEVO ESTADO PARA LOS DATOS DEL ESTUDIANTE ---
+  const [datosUsuario, setDatosUsuario] = useState({ nombre: "", grado: "" });
+
   // ESTADOS DE ADMINISTRACIÓN
-  const [isAuthorized, setIsAuthorized] = useState(false); // Controla el acceso
+  const [isAuthorized, setIsAuthorized] = useState(false); 
   const [filterGrade, setFilterGrade] = useState(null);
   const [editGrade, setEditGrade] = useState(null);
 
   useEffect(() => {
+    // Consulta inicial de usuarios (ranking)
     fetch('http://localhost:8081/usuarios')
       .then(res => res.json())
       .then(data => setData(data))
-      .catch(err => console.log(err));
+      .catch(err => console.log("Error cargando usuarios:", err));
   }, []);
 
   return (
@@ -32,7 +37,11 @@ function App() {
         <Route path="/" element={
           <div className="ventana-de-registro">
             <div className="lado-derecho-registro">
-              <CredencialesUsuario alComenzar={() => setExamenActivo(true)} />
+              {/* Pasamos setDatosUsuario para capturar el nombre y grado al hacer clic en comenzar */}
+              <CredencialesUsuario 
+                setDatosUsuario={setDatosUsuario} 
+                alComenzar={() => setExamenActivo(true)} 
+              />
             </div>
             <div className="lado-izquierdo-registro">
               <p className="estilo-de-texto-de-formulario-registro">¡Bienvenidos!</p>
@@ -43,17 +52,20 @@ function App() {
           </div>
         } />
 
-        {/* RUTA DE LA PRUEBA */}
-        <Route path="/prueba" element={<Prueba cronometroActivo={examenActivo} />} />
+        {/* RUTA DE LA PRUEBA - Recibe los datos capturados */}
+        <Route path="/prueba" element={
+          <Prueba 
+            cronometroActivo={examenActivo} 
+            datosUsuario={datosUsuario} 
+          />
+        } />
 
         {/* RUTA DE ADMINISTRACIÓN PROTEGIDA */}
         <Route path="/admin" element={
           !isAuthorized ? (
-            /* Si NO está autorizado, muestra el Login */
             <LoginAdmin onLogin={setIsAuthorized} />
           ) : (
-            /* Si SÍ está autorizado, muestra el Panel */
-            <div className="admin-layout" style={{ display: 'flex' }}>
+            <div className="admin-layout" style={{ display: 'flex', position: 'relative' }}>
               <Sidebar onSelectGrade={setEditGrade} />
               
               <DashboardAdmin 
@@ -62,21 +74,24 @@ function App() {
                 setFilter={setFilterGrade} 
               />
 
-              {/* Modal/Aviso de edición de preguntas */}
+              {/* VENTANA MODAL DEL EDITOR DE PREGUNTAS */}
               {editGrade && (
                 <div style={{
-                  position: 'fixed', right: '20px', bottom: '20px', 
-                  background: '#fff', padding: '15px', border: '2px solid #333',
-                  borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.2)', zIndex: 1000
+                  position: 'fixed',
+                  top: 0,
+                  left: 0,
+                  width: '100vw',
+                  height: '100vh',
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  zIndex: 2000
                 }}>
-                  <strong>Modo Edición:</strong> Preguntas {editGrade}
-                  <br />
-                  <button 
-                    onClick={() => setEditGrade(null)}
-                    style={{ marginTop: '10px', cursor: 'pointer' }}
-                  >
-                    Cerrar Editor
-                  </button>
+                  <EditorPreguntas 
+                    grado={editGrade} 
+                    alCerrar={() => setEditGrade(null)} 
+                  />
                 </div>
               )}
             </div>

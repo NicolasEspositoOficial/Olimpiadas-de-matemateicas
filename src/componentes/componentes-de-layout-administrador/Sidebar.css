@@ -1,0 +1,28 @@
+.sidebar-admin{
+    width: 25rem;
+    background: #e0e0e0;
+    height: 100vh;
+    padding: 2rem;
+}
+.titulo-de-preguntas{
+    font-size: var(---tamaño-de-texto-normal);
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(---estilo-de-fuente);
+}
+.btn-preguntas-grados{
+    display: block;
+    width: 100%;
+    padding: 1.5rem;
+    border: 1rem;
+    border-radius: 1rem;
+    background-color: #bdbdbd;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: var(---tamaño-de-texto-normal);
+    margin: 1rem 0rem;
+    transition: all 300ms ease;
+}
+.btn-preguntas-grados:hover{
+    scale: 110%;
+}

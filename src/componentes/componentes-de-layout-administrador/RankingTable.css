@@ -1,0 +1,27 @@
+.container-padre-ranking{
+    padding:  0rem 2rem;
+}
+.tabla-ranking{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #e0e0e0;
+}
+.estilo-de-informacion-tabla-rankin{
+    padding: 1.5rem;
+    border-bottom: 1px solid #ccc;
+    font-size: var(---tamaño-de-texto-normal);
+    font-family: var(---estilo-de-fuente);
+}
+.estilo-de-informacion-tabla-rankin-usuarios{
+    padding: 1.2rem;
+    border-bottom: 1px solid #ddd;
+    font-size: var(---tamaño-de-texto-normal);
+    font-family: var(---estilo-de-fuente);
+}
+.texto-de-datos-vacios{
+    padding: 3rem;
+    text-align: center;
+    color: #666;
+    font-family: var(---estilo-de-fuente);       
+    font-size: var(---tamaño-de-texto-normal);
+}

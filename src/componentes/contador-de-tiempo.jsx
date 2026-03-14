@@ -8,7 +8,7 @@ function ContadorDeTiempo({ activo }) {
     useEffect(() => {
         let intervalo;
         if (activo) {
-            // Se ejecuta cada 10ms para actualizar las "micras" (centésimas)
+            // Se ejecuta cada 10ms para actualizar las centésimas
             intervalo = setInterval(() => {
                 setTiempo((prev) => prev + 10);
             }, 10);
@@ -30,7 +30,8 @@ function ContadorDeTiempo({ activo }) {
     return (
         <div className="contenedorPadreDeContador">
             <div className="containerPadreContadorTiempo">
-                <p>Tiempo <span>{formatearTiempo()}</span></p>
+                {/* Agregamos el id="valor-cronometro" para que Prueba.jsx pueda leerlo */}
+                <p>Tiempo <span id="valor-cronometro">{formatearTiempo()}</span></p>
             </div>
         </div>
     );
