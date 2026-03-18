@@ -2,6 +2,7 @@ import React from 'react';
 // IMPORTACIONES CORREGIDAS (Añadido /componentes/ que faltaba en la ruta)
 import FilterBar from '../componentes/componentes-de-layout-administrador/FilterBar';
 import RankingTable from '../componentes/componentes-de-layout-administrador/RankingTable';
+import './ventana-de-administracion.css'
 
 const DashboardAdmin = ({ results, filter, setFilter }) => {
 
@@ -16,8 +17,8 @@ const DashboardAdmin = ({ results, filter, setFilter }) => {
         });
 
     return (
-        <div style={{ flex: 1, padding: '40px' }}>
-            <h2>Resultados</h2>
+        <div className='estilo-de-vetana-de-admin'>
+            <h2 className='titulo-de-vetana-admin'>Resultados</h2>
             <FilterBar activeFilter={filter} setFilter={setFilter} />
             <RankingTable data={filteredData} />
         </div>

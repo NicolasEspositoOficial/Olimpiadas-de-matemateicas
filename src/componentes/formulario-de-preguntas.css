@@ -11,10 +11,11 @@
     align-items: center;
     justify-content: space-between;
     padding: 2rem;
-    background-color: rgb(240, 240, 240);
+    background-color: var(---color-base-4);
     width: 80%;
     height: 80%;
     border-radius: 1rem;
+    box-shadow: 0rem 0rem 1.5rem var(---color-base-3);
 }
 
 .texto-de-pregunta {
@@ -23,13 +24,17 @@
 
 .contador-de-preguntas {
     text-align: center;
-    font-size: var(---tamaño-de-texto-extra-pequeño);
+    font-size: var(---tamaño-de-texto-normal);
+    font-family: var(---estilo-de-fuente);
+    color: var(---color-base-3);
     padding-bottom: 1rem;
+
 }
 
 .estilo-de-pregunta {
     font-size: var(---tamaño-de-texto-normal);
     text-align: center;
+    
     font-family: var(---estilo-de-fuente);
 }
 
@@ -62,22 +67,23 @@
     font-size: var(---tamaño-de-texto-normal);
     border: 2px solid transparent;
     border-radius: 1rem;
-    background-color: rgb(228, 228, 228);
+    background-color: var(---color-base-6);
     transition: all 250ms ease;
     cursor: pointer;
 }
 
 .estilo-de-respuesta:hover {
     scale: 110%;
-    background-color: rgb(216, 216, 216);
+    background-color: var(---color-base-5);
+    color: white;
 }
 
 /* --- ESTADO SELECCIONADO --- */
 .estilo-de-respuesta.seleccionada {
     scale: 115%;
-    background-color: #3e77e8; /* Azul corporativo */
+    background-color: var(---color-base-5); /* Azul corporativo */
     color: white;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0rem 0rem 0.5rem var(---color-base-3);
     font-weight: bold;
 }
 
@@ -87,5 +93,5 @@
 
 .estilo-de-respuesta.seleccionada:hover {
     scale: 115%;
-    background-color: #3366cc;
+    background-color: var(---color-base-5);
 }

@@ -38,7 +38,7 @@ const ControladorDePreguntas = ({ onSiguiente, onAnterior, esPrimera, esUltima }
                     // IMPORTANTE: Quitamos el disabled={esUltima} para que deje hacer clic al final
                     style={{ 
                         cursor: 'pointer',
-                        background: esUltima ? '#4CAF50' : '' // Un color verde si es el último
+                        background: esUltima ? '#0d1b2a' : '' // Un color verde si es el último
                     }}
                 >
                     {esUltima ? (

@@ -3,13 +3,13 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #f0f0f0;
+    background: var(---color-base-5);
 }
 .estilo-de-formulario{
-    background: white;
+    background: var(---color-base-4);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0rem 0rem 0.5rem var(---color-base-3);
 }
 .titulo-de-bloque-de-credencuales-admin{
     text-align: center;
@@ -24,11 +24,16 @@
     padding: 1rem 1rem;
     font-family: var(---estilo-de-fuente);  
     font-size: var(---tamaño-de-texto-normal);  
+    outline: none;
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0rem 0rem 0.3rem var(---color-base-3);
 }
+
 .btn-iniciar-admin{
     width: 100%;
     padding: 10px;
-    background: #333;
+    background: var(---color-base-3);
     color: white;
     border: none;
     cursor: pointer;

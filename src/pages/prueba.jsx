@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import FormularioDePreguntasEstudiante from '../componentes/formulario-de-preguntas';
 import ContadorDeTiempo from '../componentes/contador-de-tiempo';
 import ControladorDePreguntas from '../componentes/Controladores-de-preguntas';
+import './prueba.css';
 
 const Prueba = ({ cronometroActivo, datosUsuario }) => {
     const [preguntas, setPreguntas] = useState([]);

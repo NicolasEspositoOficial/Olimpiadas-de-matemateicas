@@ -1,6 +1,9 @@
 .sidebar-admin{
     width: 25rem;
-    background: #e0e0e0;
+    background: var(---color-base-3);
+    color: var(---color-base-7);
+    border-right: 0.05rem solid var(---color-base-3);
+    box-shadow: 0rem 0rem 1rem var(---color-base-3);
     height: 100vh;
     padding: 2rem;
 }

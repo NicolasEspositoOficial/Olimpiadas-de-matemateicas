@@ -6,7 +6,7 @@ const Sidebar = ({ onSelectGrade }) => {
   return (
     <div className="sidebar-admin">
       <h2 className='titulo-de-preguntas'>Preguntas</h2>
-      <div style={{ marginTop: '50px' }}>
+      <div style={{ marginTop: '5rem' }}>
         {grados.map((grado) => (
           <button key={grado} onClick={() => onSelectGrade(grado)} className='btn-preguntas-grados'>Preguntas <br /> {grado}</button>
         ))}

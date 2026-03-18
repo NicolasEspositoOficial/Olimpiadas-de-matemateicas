@@ -1,0 +1,11 @@
+.estilo-de-vetana-de-admin{
+    flex: 1;
+    padding: 2rem;
+    background-color: #FFF;
+}
+.titulo-de-vetana-admin{
+    text-align: center;
+    font-family: var(---estilo-de-fuente);
+    font-size: var(---tamaño-de-texto-normal);
+    margin: 1rem 0rem;
+}

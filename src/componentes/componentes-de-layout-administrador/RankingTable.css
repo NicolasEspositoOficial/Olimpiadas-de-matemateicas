@@ -1,27 +1,60 @@
-.container-padre-ranking{
-    padding:  0rem 2rem;
+/* Contenedor con scroll */
+.container-padre-ranking {
+    padding: 0; /* Eliminamos el padding lateral para que el scroll pegue al borde */
+    margin: 0rem 1rem;
+    max-height: 76vh; /* Ajusta esta altura según prefieras */
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 1.5rem; /* El radio ahora contiene al scroll */
+    box-shadow: 0rem 0rem 1rem var(---color-base-3);
+    background-color: var(---color-base-4);
 }
-.tabla-ranking{
+/* Tabla */
+.tabla-ranking {
     width: 100%;
-    border-collapse: collapse;
-    background-color: #e0e0e0;
+    border-collapse: separate; /* Cambiado a separate para que el sticky funcione mejor con bordes */
+    border-spacing: 0;
 }
-.estilo-de-informacion-tabla-rankin{
+/* Encabezado FIJO (Sticky) */
+.tabla-ranking thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.estilo-de-informacion-tabla-rankin {
+    background-color: var(---color-base-7); /* Color de fondo del encabezado */
     padding: 1.5rem;
-    border-bottom: 1px solid #ccc;
     font-size: var(---tamaño-de-texto-normal);
     font-family: var(---estilo-de-fuente);
+    font-weight: bold;
+    border-bottom: 2px solid #ccc;
+    text-align: center;
 }
-.estilo-de-informacion-tabla-rankin-usuarios{
+/* Celdas de los usuarios */
+.estilo-de-informacion-tabla-rankin-usuarios {
     padding: 1.2rem;
-    border-bottom: 1px solid #ddd;
     font-size: var(---tamaño-de-texto-normal);
     font-family: var(---estilo-de-fuente);
+    border-bottom: 0.1rem solid var(---color-base-3);
+    color: #333;
+    text-transform: capitalize;
 }
-.texto-de-datos-vacios{
+/* Datos vacíos */
+.texto-de-datos-vacios {
     padding: 3rem;
     text-align: center;
     color: #666;
     font-family: var(---estilo-de-fuente);       
     font-size: var(---tamaño-de-texto-normal);
+}
+/* Estilo opcional para la barra de scroll (más moderna) */
+.container-padre-ranking::-webkit-scrollbar {
+    width: 8px;
+}
+.container-padre-ranking::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 10px;
+}
+.container-padre-ranking::-webkit-scrollbar-track {
+    background: transparent;
 }

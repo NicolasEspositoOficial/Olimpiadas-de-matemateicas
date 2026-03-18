@@ -1,8 +1,13 @@
 :root{
     /* Colores */
-    ---color-base-1: #ffffff;
-    ---color-base-2: #fff;
-    ---color-base-3: #ffff;
+    ---color-base-1: #023047;
+    ---color-base-2: #ffb703;
+    ---color-base-3: #0d1b2a;
+    ---color-base-4: #e0e1dd;
+    ---color-base-5: #778da9;
+    ---color-base-6: #96b9e6;
+    ---color-base-7: #FFFF;
+
     /* tamaños de textos */
     ---tamaño-de-texto-extra-pequeño: 1.3rem;
     ---tamaño-de-texto-pequeño: 1.6rem;
@@ -22,11 +27,12 @@
     width: 50%;
 }
 .lado-izquierdo-registro{
-    background-color: aquamarine;
     align-content: center;
     font-size: var(---tamaño-de-texto-normal);
     padding: 2rem;
 }
 .estilo-de-texto-de-formulario-registro{
     padding: 1rem  0rem;
+    font-family: var(---estilo-de-fuente);
+    font-size: var(---tamaño-de-texto-normal);
 }

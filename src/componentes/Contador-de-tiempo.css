@@ -4,6 +4,7 @@
 }
 .containerPadreContadorTiempo{
     margin: auto;
-    font-size: var(---tamaño-de-texto-normal);
+    font-size: var(---tamaño-de-texto-extra-grande);
     font-family: var(---estilo-de-fuente);
+    color: var(---color-base-4);
 }

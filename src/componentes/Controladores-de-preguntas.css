@@ -20,6 +20,6 @@
 }
 .btnControl:hover{
     scale: 110%;
-    background-color: black;
-    color: aliceblue;
+    background-color: var(---color-base-3);
+    color: var(---color-base-4);
 }
