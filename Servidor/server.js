@@ -4,11 +4,11 @@ const mysql = require('mysql');
 const cors = require('cors');
 const app = express();
 
-// Middlewares
+// --- MIDDLEWARES ---
 app.use(cors());
 app.use(express.json()); 
 
-// Configuración de base de datos (Hostinger)
+// --- CONFIGURACIÓN DE BASE DE DATOS (HOSTINGER) ---
 const dbConfig = {
     host: "srv1848.hstgr.io", 
     user: "u971714708_olipiadas", 
@@ -18,14 +18,13 @@ const dbConfig = {
 
 let db;
 
-// Función para manejar la conexión y reconexión automática
 function handleDisconnect() {
     db = mysql.createConnection(dbConfig);
 
     db.connect((err) => {
         if (err) {
             console.error("❌ ERROR DE CONEXIÓN:", err.message);
-            setTimeout(handleDisconnect, 2000); // Intenta reconectar en 2 segundos
+            setTimeout(handleDisconnect, 2000); 
         } else {
             console.log("🚀 ¡CONEXIÓN EXITOSA! Base de datos en Hostinger lista.");
         }
@@ -34,7 +33,7 @@ function handleDisconnect() {
     db.on('error', (err) => {
         console.error("⚠️ ERROR EN DB:", err.code);
         if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNRESET') {
-            handleDisconnect(); // Reconecta si se pierde la sesión
+            handleDisconnect(); 
         } else {
             throw err;
         }
@@ -45,7 +44,7 @@ handleDisconnect();
 
 // --- RUTAS DEL API ---
 
-// 1. Obtener Ranking (Usuarios estudiantes ordenados por desempeño)
+// 1. Obtener Ranking
 app.get('/usuarios', (req, res) => {
     const query = `
         SELECT id, nombre, grado, aciertos, tiempo 
@@ -59,25 +58,15 @@ app.get('/usuarios', (req, res) => {
     });
 });
 
-// 2. Guardar Resultado (Ruta corregida y simplificada)
+// 2. Guardar Resultado
 app.post('/guardar-resultado', (req, res) => {
     const { nombre, grado, aciertos, tiempo } = req.body;
-    
-    // Insertamos solo los campos necesarios ahora que quitaste la restricción
     const query = `
         INSERT INTO usuarios (nombre, grado, aciertos, tiempo, rol, contraseña) 
         VALUES (?, ?, ?, ?, 'estudiante', '123')
     `;
-    
     db.query(query, [nombre, grado, aciertos, tiempo], (err, result) => {
-        if (err) {
-            console.error("❌ ERROR SQL AL GUARDAR:", err.sqlMessage);
-            return res.status(500).json({ 
-                error: "Error al guardar en la base de datos", 
-                detalle: err.sqlMessage 
-            });
-        }
-        console.log("✅ Resultado guardado exitosamente para:", nombre);
+        if (err) return res.status(500).json({ error: err.sqlMessage });
         return res.json({ message: "Éxito", id: result.insertId });
     });
 });
@@ -92,11 +81,9 @@ app.get('/preguntas', (req, res) => {
     });
 });
 
-// 4. Admin: Crear o Actualizar Preguntas (Upsert)
+// 4. Admin: Guardar/Actualizar Pregunta
 app.post('/guardar-pregunta', (req, res) => {
     const { id, grado, titulo, enunciado, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta } = req.body;
-    
-    // Si el ID es temporal (de la UI), lo tratamos como nuevo registro
     const idReal = (id && String(id).includes('temp')) ? null : id;
     
     const query = `
@@ -108,12 +95,10 @@ app.post('/guardar-pregunta', (req, res) => {
         opcion_c=VALUES(opcion_c), opcion_d=VALUES(opcion_d), 
         respuesta_correcta=VALUES(respuesta_correcta)
     `;
-
     const values = [idReal, grado, titulo, enunciado, opcion_a, opcion_b, opcion_c, opcion_d, respuesta_correcta];
-
     db.query(query, values, (err, result) => {
         if (err) return res.status(500).json({ error: err.sqlMessage });
-        return res.json({ message: "Pregunta procesada con éxito", id: result.insertId || idReal });
+        return res.json({ message: "Éxito", id: result.insertId || idReal });
     });
 });
 
@@ -126,21 +111,28 @@ app.delete('/eliminar-pregunta/:id', (req, res) => {
     });
 });
 
-// --- SERVIR FRONTEND ---
+// --- SERVIR FRONTEND (CONFIGURACIÓN PARA HOSTINGER) ---
 
-// Servir archivos estáticos de la carpeta build de React
-const buildPath = path.join(__dirname, '../build');
+// Definimos la ruta a la carpeta build (un nivel arriba de /Servidor)
+const buildPath = path.resolve(__dirname, '..', 'build');
+
+// Servimos archivos estáticos
 app.use(express.static(buildPath));
 
-// Manejar cualquier otra ruta devolviendo el index.html (para que React Router funcione)
-app.get('*', (req, res) => { 
-    res.sendFile(path.join(buildPath, 'index.html')); 
+// MANEJO DE RUTAS DE REACT: Esta ruta DEBE ir al final de todas las API
+app.get('*', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'), (err) => {
+        if (err) {
+            res.status(500).send("Error: No se encontró la carpeta build o el archivo index.html");
+        }
+    });
 });
 
-// Inicio del servidor
+// --- INICIO DEL SERVIDOR ---
 const PORT = process.env.PORT || 8081; 
 app.listen(PORT, () => {
     console.log(`-------------------------------------------`);
-    console.log(`Servidor activo en: http://localhost:${PORT}`);
+    console.log(`Servidor activo en puerto: ${PORT}`);
+    console.log(`Ruta build: ${buildPath}`);
     console.log(`-------------------------------------------`);
 });
