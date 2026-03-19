@@ -1,4 +1,3 @@
-require('dotenv').config(); // Al estar el .env dentro de la misma carpeta Servidor, esto lo leerá correctamente
 const express = require('express');
 const path = require('path');
 const mysql = require('mysql2');
@@ -11,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 // --- CONFIGURACIÓN DE BASE DE DATOS (POOL) ---
-// Usamos el Pool para gestionar las conexiones de forma automática y eficiente
+// Hostinger inyecta estas variables (process.env) automáticamente desde el panel
 const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -26,7 +25,6 @@ const pool = mysql.createPool({
 pool.getConnection((err, connection) => {
     if (err) {
         console.error("❌ ERROR DE CONEXIÓN A LA DB:", err.message);
-        console.log("Asegúrate de que el archivo .env tenga los datos correctos y esté dentro de la carpeta Servidor.");
     } else {
         console.log("🚀 POOL DE CONEXIÓN LISTO: Base de datos vinculada con éxito.");
         connection.release();
