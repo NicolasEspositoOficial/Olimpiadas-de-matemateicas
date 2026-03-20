@@ -6,10 +6,10 @@ const EditorPreguntas = ({ grado, alCerrar }) => {
     const [preguntaSeleccionada, setPreguntaSeleccionada] = useState(null);
     const [cargando, setCargando] = useState(true);
 
-    // 1. CARGAR PREGUNTAS DESDE LA BD
+    // 1. CARGAR PREGUNTAS (Ruta corregida para Hostinger)
     const cargarPreguntas = () => {
         setCargando(true);
-        fetch(`http://localhost:8081/preguntas?grado=${grado}`)
+        fetch(`/preguntas?grado=${grado}`)
             .then(res => res.json())
             .then(data => {
                 setPreguntas(data);
@@ -30,10 +30,10 @@ const EditorPreguntas = ({ grado, alCerrar }) => {
         cargarPreguntas();
     }, [grado]);
 
-    // 2. CREAR NUEVA PREGUNTA (Botón +)
+    // 2. CREAR NUEVA PREGUNTA
     const nuevaPregunta = () => {
         const nueva = {
-            id: null, // El servidor le asignará uno real
+            id: null, 
             titulo: '',
             enunciado: '',
             opcion_a: '',
@@ -44,18 +44,17 @@ const EditorPreguntas = ({ grado, alCerrar }) => {
             grado: grado
         };
         setPreguntaSeleccionada(nueva);
-        // La añadimos temporalmente a la lista para verla
         setPreguntas([...preguntas, { ...nueva, id: 'temp-' + Date.now() }]);
     };
 
-    // 3. GUARDAR EN BASE DE DATOS
+    // 3. GUARDAR EN BD (Ruta corregida para Hostinger)
     const guardarEnBD = () => {
         if (!preguntaSeleccionada.enunciado || !preguntaSeleccionada.opcion_a) {
             alert("Por favor rellena al menos el enunciado y la opción A");
             return;
         }
 
-        fetch('http://localhost:8081/guardar-pregunta', {
+        fetch('/guardar-pregunta', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(preguntaSeleccionada)
@@ -63,22 +62,21 @@ const EditorPreguntas = ({ grado, alCerrar }) => {
         .then(res => res.json())
         .then(data => {
             alert("¡Pregunta guardada con éxito!");
-            cargarPreguntas(); // Recargamos para obtener el ID real de MySQL
+            cargarPreguntas(); 
         })
         .catch(err => alert("Error al conectar con el servidor"));
     };
 
-    // 4. ELIMINAR PREGUNTA
+    // 4. ELIMINAR PREGUNTA (Ruta corregida para Hostinger)
     const eliminarPregunta = () => {
         if (!preguntaSeleccionada.id || String(preguntaSeleccionada.id).includes('temp')) {
-            // Si es una pregunta que no se ha guardado, solo la quitamos de la lista
             setPreguntas(preguntas.filter(p => p.id !== preguntaSeleccionada.id));
             setPreguntaSeleccionada(null);
             return;
         }
 
         if (window.confirm("¿Estás seguro de eliminar esta pregunta definitivamente?")) {
-            fetch(`http://localhost:8081/eliminar-pregunta/${preguntaSeleccionada.id}`, {
+            fetch(`/eliminar-pregunta/${preguntaSeleccionada.id}`, {
                 method: 'DELETE'
             })
             .then(() => {
@@ -89,13 +87,11 @@ const EditorPreguntas = ({ grado, alCerrar }) => {
         }
     };
 
-    // 5. MANEJAR CAMBIOS EN INPUTS
+    // 5. MANEJAR CAMBIOS
     const manejarCambioInput = (e) => {
         const { name, value } = e.target;
         const actualizada = { ...preguntaSeleccionada, [name]: value };
         setPreguntaSeleccionada(actualizada);
-
-        // Actualizar lista lateral en tiempo real
         setPreguntas(preguntas.map(p => p.id === preguntaSeleccionada.id ? actualizada : p));
     };
 

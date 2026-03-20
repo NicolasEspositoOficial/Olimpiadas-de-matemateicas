@@ -23,8 +23,8 @@ function App() {
   const [editGrade, setEditGrade] = useState(null);
 
   useEffect(() => {
-    // Consulta inicial de usuarios (ranking)
-    fetch('http://localhost:8081/usuarios')
+    // CAMBIO REALIZADO: Ahora usa ruta relativa '/usuarios' en lugar de localhost
+    fetch('/usuarios')
       .then(res => res.json())
       .then(data => setData(data))
       .catch(err => console.log("Error cargando usuarios:", err));
@@ -37,7 +37,6 @@ function App() {
         <Route path="/" element={
           <div className="ventana-de-registro">
             <div className="lado-derecho-registro">
-              {/* Pasamos setDatosUsuario para capturar el nombre y grado al hacer clic en comenzar */}
               <CredencialesUsuario 
                 setDatosUsuario={setDatosUsuario} 
                 alComenzar={() => setExamenActivo(true)} 
@@ -52,7 +51,7 @@ function App() {
           </div>
         } />
 
-        {/* RUTA DE LA PRUEBA - Recibe los datos capturados */}
+        {/* RUTA DE LA PRUEBA */}
         <Route path="/prueba" element={
           <Prueba 
             cronometroActivo={examenActivo} 

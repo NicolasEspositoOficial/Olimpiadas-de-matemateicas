@@ -1,15 +1,17 @@
 # --- SEGURIDAD ---
-# Ignorar el archivo de variables de entorno (Base de datos)
+# Ignorar el archivo de variables de entorno local
+.env
 Servidor/.env
 
 # --- DEPENDENCIAS ---
-# No subimos las librerías, se instalan con npm install
+# No subimos las librerías, pesan mucho
 node_modules/
 Servidor/node_modules/
 
 # --- COMPILACIÓN ---
-# Ignorar carpetas de producción de React
-
+# IMPORTANTE: NO ponemos "build/" aquí. 
+# Queremos que la carpeta de producción SÍ se suba a GitHub 
+# para que Hostinger la pueda leer.
 
 # --- ARCHIVOS DEL SISTEMA ---
 .DS_Store

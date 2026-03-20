@@ -12,7 +12,8 @@ const Prueba = ({ cronometroActivo, datosUsuario }) => {
 
     useEffect(() => {
         if (datosUsuario && datosUsuario.grado) {
-            fetch(`http://localhost:8081/preguntas?grado=${datosUsuario.grado}`)
+            // CAMBIO 1: Ruta relativa para cargar preguntas
+            fetch(`/preguntas?grado=${datosUsuario.grado}`)
                 .then(res => res.json())
                 .then(data => {
                     setPreguntas(data);
@@ -35,8 +36,6 @@ const Prueba = ({ cronometroActivo, datosUsuario }) => {
             }
         });
 
-        // --- CAPTURA DE TIEMPO CORREGIDA ---
-        // Buscamos el elemento por el ID que pusimos en el componente ContadorDeTiempo
         const elementoTiempo = document.getElementById('valor-cronometro');
         const tiempoEmpleado = elementoTiempo ? elementoTiempo.innerText.trim() : "00:00:00";
 
@@ -47,7 +46,8 @@ const Prueba = ({ cronometroActivo, datosUsuario }) => {
             tiempo: tiempoEmpleado 
         };
 
-        fetch('http://localhost:8081/guardar-resultado', {
+        // CAMBIO 2: Ruta relativa para guardar el resultado
+        fetch('/guardar-resultado', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(datosFinales)
