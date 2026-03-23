@@ -1,7 +1,5 @@
 # --- SEGURIDAD ---
 # Ignorar el archivo de variables de entorno local
-.env
-Servidor/.env
 
 # --- DEPENDENCIAS ---
 # No subimos las librerías, pesan mucho

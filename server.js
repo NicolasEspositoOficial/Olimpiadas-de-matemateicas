@@ -1,3 +1,6 @@
+// 1. Cargar variables de entorno al principio de todo
+require('dotenv').config(); 
+
 const express = require('express');
 const path = require('path');
 const mysql = require('mysql2');
@@ -10,21 +13,21 @@ app.use(cors());
 app.use(express.json());
 
 // --- CONFIGURACIÓN DE BASE DE DATOS (POOL) ---
-// Usamos process.env para que la contraseña no viaje en el código
+// Ahora leerá correctamente los datos de tu panel de Hostinger o archivo .env
 const pool = mysql.createPool({
     host: process.env.DB_HOST || 'localhost', 
     user: process.env.DB_USER || 'u971714708_olipiadas', 
-    password: process.env.DB_PASS, // <--- Hostinger leerá esto de su panel
+    password: process.env.DB_PASS, 
     database: process.env.DB_NAME || 'u971714708_olipiadas',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
 });
 
-// Verificación inicial de conexión
+// Verificación inicial de conexión para ver errores en los logs
 pool.getConnection((err, connection) => {
     if (err) {
-        console.error("❌ ERROR DE CONEXIÓN A LA DB:", err.message);
+        console.error("❌ ERROR DE CONEXIÓN A LA DB:", err.code, err.message);
     } else {
         console.log("🚀 CONEXIÓN EXITOSA: Base de datos vinculada.");
         connection.release();
@@ -32,6 +35,7 @@ pool.getConnection((err, connection) => {
 });
 
 // --- RUTAS DEL API ---
+
 app.get('/usuarios', (req, res) => {
     const query = "SELECT id, nombre, grado, aciertos, tiempo FROM usuarios WHERE rol = 'estudiante' ORDER BY aciertos DESC, tiempo ASC";
     pool.query(query, (err, data) => {
@@ -85,15 +89,19 @@ app.delete('/eliminar-pregunta/:id', (req, res) => {
 });
 
 // --- SERVIR FRONTEND (REACT BUILD) ---
-const buildPath = path.resolve(__dirname, '..', 'build');
+// IMPORTANTE: Como server.js y build están ahora en la misma carpeta raíz
+const buildPath = path.join(__dirname, 'build');
 app.use(express.static(buildPath));
 
+// Manejo de rutas de React (SPA) para que no den 404 al recargar
 app.get('*', (req, res) => {
     res.sendFile(path.join(buildPath, 'index.html'));
 });
 
 // --- INICIO ---
+// Hostinger asigna el puerto automáticamente mediante process.env.PORT
 const PORT = process.env.PORT || 8081; 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
     console.log(`Servidor activo en puerto: ${PORT}`);
+    console.log(`Sirviendo archivos desde: ${buildPath}`);
 });
